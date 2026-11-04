@@ -9,17 +9,21 @@ function validateVin() {
 checkBtn.addEventListener('click', function(){
     const prohibited = ["I", "O", "Q", " ", "-"];
     let vin = vinInp.value.trim().toUpperCase();
+    let f = true;
     for (let i of prohibited){
         if (vin.includes(i)){
-            alert("VIN содержит запрещенные символы");
+            result.textContent = "VIN содержит запрещенные символы";
+            f = false;
             break;
         }
-    }
+    };
     if (vin.length != 17){
-        alert("VIN не соотвтествует по длине");
-    }
+        f = false;
+        result.textContent = "VIN не соотвтествует по длине";
+    };
 
-    console.log(vin);
-    console.log("---------");
+    if (f){
+        result.textContent = vin;
+    };
 });
 

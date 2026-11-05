@@ -6,7 +6,7 @@ function validateVin() {
 
 };
 
-checkBtn.addEventListener('click', function(){
+checkBtn.addEventListener('click', async function(){
     const prohibited = ["I", "O", "Q", " ", "-"];
     let vin = vinInp.value.trim().toUpperCase();
     let f = true;
@@ -23,7 +23,22 @@ checkBtn.addEventListener('click', function(){
     };
 
     if (f){
-        result.textContent = vin;
+        // result.textContent = vin;
+        let response = await fetch(
+            'http://127.0.0.1:8000/api/check',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    'vin': vin
+                })
+            }
+        )
+        let data = await response.json()
+        result.textContent = data.message + ': ' + data.vin
     };
 });
 

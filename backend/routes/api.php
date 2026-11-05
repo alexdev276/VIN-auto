@@ -8,4 +8,4 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get("/check", [VinController::class, 'check']);
+Route::post("/check", [VinController::class, 'check']);
